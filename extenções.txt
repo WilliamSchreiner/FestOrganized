@@ -1,0 +1,2 @@
+drop-box:
+npm install react-native-dropdown-select-list
