@@ -2,18 +2,17 @@ import { View, Text, StyleSheet,TextInput, TouchableOpacity, FlatList, Alert } f
 // a diferença entre faltlist e scrollview é a renderização, flatlist é mais benefico em questao de requerimento de renderização.
 import { StatusBar } from 'expo-status-bar';
 import { Participante } from '../components/Participantes';
-import { useEffect, useState } from 'react';
-import {data} from './data'
+import React,{ useState } from 'react';
+import {data} from './data';
+import { SelectList } from 'react-native-dropdown-select-list';
+
 
 export function Home() {
     const [name, setName] = useState('');
     const [participantes, setParticipantes] = useState([]);
     const [produtos, setProdutos] = useState([data]);
+    const [selected, setSelected] = React.useState("");
 
-    useEffect(() => {
-       console.log(produtos)
-       
-      }, []);
 
     function handleParicipantAdd(name) {
         if (participantes.includes(name)){
@@ -63,6 +62,8 @@ export function Home() {
             placeholderTextColor={'#fff'}
             value={name}
             onChangeText={setName}>
+
+
                 
             </TextInput>
 
@@ -73,6 +74,15 @@ export function Home() {
             </TouchableOpacity>
 
             </View>
+            <View style={styles.boxDrop}>
+                <SelectList 
+                 style={styles.dropDown} 
+                setSelected={(val) => setSelected(val)} 
+                data={data} 
+                save="value"
+                />
+            </View>
+            
 
             <View>
                 
@@ -99,7 +109,7 @@ export function Home() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#000000',
+      backgroundColor: '#fff',
       width: '100%'
     },
     header: {
@@ -151,6 +161,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#fff',
         marginLeft: 14
+    },
+    dropDown: {
+        fontSize: 10,
+        color: '#fff'
     }
   });
   
