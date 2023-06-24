@@ -108,8 +108,6 @@ const styles = StyleSheet.create({
       },
     title: {
         color: '#fff',
-        textShadowColor: 'blue',
-        textShadowOffset: {width: 2, height: 3},  
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 48,
@@ -118,9 +116,6 @@ const styles = StyleSheet.create({
     subTitle: {
         color: 'gray',
         textShadowColor: '#fff',
-        textShadowColor: 'blue',
-        textShadowOffset: {width: 2, height: 3},
-        shadowOpacity: 0.2,
         fontSize: 16,
         marginTop: 2,
         marginLeft: 18
@@ -135,9 +130,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         height: 56,
         backgroundColor: '#1f1e25',
-        textShadowColor: 'blue',
-        textShadowOffset: {width: 2, height: 3},
-        textShadowOpacity: 0.2,
         fontSize: 16,
         marginTop: 2,
         marginLeft: 18,
