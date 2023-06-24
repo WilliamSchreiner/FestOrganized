@@ -50,7 +50,7 @@ export function Home() {
             
             <View  style={styles.header}>
             <Text style={styles.title}> Nome do Evento</Text>
-            <Text style={styles.subTitle}> Sexta, 2 de junho</Text>
+            <Text style={styles.subTitle}> sexta-fereira, 23 de junho</Text>
             </View>
 
 
