@@ -21,9 +21,12 @@ export function Home() {
             Alert.alert(`Write a produto.`);
             console.log(`Write a produto.`);
         }else {
-        console.log(`add ${produto}`);
-        setParticipantes((prevState)=> [...prevState, produto]);
-        setCarteira(carteira + data.produto.valor)
+            let produtoName =  data.filter(data => {
+                return data.key === produto;
+              })
+        console.log(`add ${produtoName}`);
+        setParticipantes((prevState)=> [...prevState, produtoName]);
+        setCarteira(carteira + data.produto.valor);
         };
     }
 
@@ -57,6 +60,8 @@ export function Home() {
             <View style={styles.boxDrop}>
                 <SelectList 
                setSelected={setSelected} 
+               placeholder='Escolha seu alimento'
+               searchPlaceholder='Busque seu alimento'
                data={data}  
                 />
                 
@@ -80,7 +85,8 @@ export function Home() {
                   keyExtractor={(item)=> item}
                   renderItem={({item})=> (
             <Participante key={item} 
-            name={item} 
+            name={item.value} 
+            valor={item.valor}
             participantRemove={()=>handleParicipantDelete(item)} />
             )}
                   ListFooterComponent={()=>{

@@ -1,11 +1,15 @@
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native'
 
-export function Participante({name, participantRemove}){
+export function Participante({name,valor, participantRemove}){
             
     return(
         <View style={styles.container}>
             <Text style={styles.name}>
                 {name}
+            </Text>
+
+            <Text style={styles.valor}>
+                {valor}
             </Text>
 
             <TouchableOpacity 
@@ -57,6 +61,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#fff',
         marginLeft: 18
+    },
+    valor: {
+        fontSize: 24,
     }
   });
   
