@@ -2,11 +2,18 @@ import { View, Text, StyleSheet,TextInput, TouchableOpacity, FlatList, Alert } f
 // a diferença entre faltlist e scrollview é a renderização, flatlist é mais benefico em questao de requerimento de renderização.
 import { StatusBar } from 'expo-status-bar';
 import { Participante } from '../components/Participantes';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {data} from './data'
 
 export function Home() {
     const [name, setName] = useState('');
-    const [participantes, setParticipantes] = useState([])
+    const [participantes, setParticipantes] = useState([]);
+    const [produtos, setProdutos] = useState([data]);
+
+    useEffect(() => {
+       console.log(produtos)
+       
+      }, []);
 
     function handleParicipantAdd(name) {
         if (participantes.includes(name)){
