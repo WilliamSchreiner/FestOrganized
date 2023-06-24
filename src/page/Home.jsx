@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet,TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
-// a diferença entre faltlist e scrollview é a renderização, flatlist é mais benefico em questao de requerimento de renderização.
+
 import { StatusBar } from 'expo-status-bar';
 import { Participante } from '../components/Participantes';
 import React,{ useState } from 'react';
@@ -13,26 +13,27 @@ export function Home() {
     const [carteira, setCarteira] = useState(0);
 
 
-    function handleParicipantAdd(name) {
-        if (participantes.includes(name)){
-        Alert.alert(`${name} já existe`);
-        console.log(`${name} já existe`);
-        }else if (name === ""){
-            Alert.alert(`Write a name.`);
-            console.log(`Write a name.`);
+    function handleParicipantAdd(produto) {
+        if (participantes.includes(produto)){
+        Alert.alert(`${produto} já existe`);
+        console.log(`${produto} já existe`);
+        }else if (produto === ""){
+            Alert.alert(`Write a produto.`);
+            console.log(`Write a produto.`);
         }else {
-        console.log(`add ${name}`);
-        setParticipantes((prevState)=> [...prevState, name]);
+        console.log(`add ${produto}`);
+        setParticipantes((prevState)=> [...prevState, produto]);
+        setCarteira(carteira + data.produto.valor)
         };
     }
 
-    function handleParicipantDelete(name) {
-        Alert.alert("Remover", `You want remove ${name}?`,[
+    function handleParicipantDelete(produto) {
+        Alert.alert("Remover", `You want remove ${produto}?`,[
             {
                 text:'sim',
                 onPress: ()=> {
                     setParticipantes(prevState => (
-                        prevState.filter(participantName => participantName !== name)
+                        prevState.filter(produtoName => produtoName !== produto)
                     ))
                 }       
             },
@@ -41,7 +42,6 @@ export function Home() {
                 onPress: ()=>Alert.alert('ok, canceled.')
             }
         ])
-        
     }
 
     return (
@@ -53,7 +53,7 @@ export function Home() {
             <Text style={styles.subTitle}> Sexta, 2 de junho</Text>
             </View>
 
-
+{/*link document dropBox https://www.npmjs.com/package/react-native-dropdown-select-list */ }
             <View style={styles.boxDrop}>
                 <SelectList 
                setSelected={setSelected} 
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
         width: '100%'
       },
     title: {
-        color: '#fff',
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 48,
