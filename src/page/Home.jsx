@@ -8,10 +8,9 @@ import { SelectList } from 'react-native-dropdown-select-list';
 
 
 export function Home() {
-    const [name, setName] = useState('');
     const [participantes, setParticipantes] = useState([]);
-    const [produtos, setProdutos] = useState([data]);
     const [selected, setSelected] = React.useState("");
+    const [carteira, setCarteira] = useState(0);
 
 
     function handleParicipantAdd(name) {
@@ -54,33 +53,23 @@ export function Home() {
             <Text style={styles.subTitle}> Sexta, 2 de junho</Text>
             </View>
 
-            <View style={styles.boxInput}>
 
-            <TextInput 
-            style={styles.input}
-            placeholder='Nome do Participante...'
-            placeholderTextColor={'#fff'}
-            value={name}
-            onChangeText={setName}>
-
-
+            <View style={styles.boxDrop}>
+                <SelectList 
+               setSelected={setSelected} 
+               data={data}  
+                />
                 
-            </TextInput>
-
-            <TouchableOpacity 
-            style={styles.button} 
-            onPress={()=>handleParicipantAdd(name)}>
+                <TouchableOpacity 
+                style={styles.button} 
+                onPress={()=>handleParicipantAdd(selected)}>
                 <Text  style={styles.buttonText}> + </Text>
             </TouchableOpacity>
 
             </View>
-            <View style={styles.boxDrop}>
-                <SelectList 
-                 style={styles.dropDown} 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                />
+
+            <View style={styles.boxValor}>
+                <Text>{carteira}</Text>
             </View>
             
 
