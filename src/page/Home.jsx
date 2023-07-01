@@ -1,50 +1,63 @@
-import { View, Text, StyleSheet,TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet,TextInput, TouchableOpacity, Alert } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 import { Participante } from '../components/Participantes';
 import React,{ useState } from 'react';
-import {data} from './data';
-import { SelectList } from 'react-native-dropdown-select-list';
+
+import { Dropdown } from 'react-native-element-dropdown';
 
 
 export function Home() {
-    const [participantes, setParticipantes] = useState([]);
-    const [selected, setSelected] = React.useState("");
+    
+    const data = [
+    { label: 'Item 1- R$: 5',valor: 5, value: '1' },
+    { label: 'Item 2- R$: 5',valor: 5, value: '2' },
+    { label: 'Item 3- R$: 5',valor: 5, value: '3' },
+    { label: 'Item 4- R$: 5',valor: 5, value: '4' },
+    { label: 'Item 5- R$: 5',valor: 5, value: '5' },
+    { label: 'Item 6- R$: 5',valor: 5, value: '6' },
+    { label: 'Item 7- R$: 5',valor: 5, value: '7' },
+    { label: 'Item 8- R$: 5',valor: 5, value: '8' },
+  ];
+
+    const [itens, setItens] = useState([]);
+    const [value, setValue] = useState("");
+    const [quantid, setQuantid] = useState(1);
     const [carteira, setCarteira] = useState(0);
 
 
-    function handleParicipantAdd(produto) {
-        if (participantes.includes(produto)){
-        Alert.alert(`${produto} já existe`);
-        console.log(`${produto} já existe`);
-        }else if (produto === ""){
-            Alert.alert(`Write a produto.`);
-            console.log(`Write a produto.`);
+    function handleParicipantAdd(produtoId) {
+        if (produtoId === ""){
+            Alert.alert(`Escolha um produto.`);
+            console.log(`Escolha um produto.`);
         }else {
-            let produtoName =  data.filter(data => {
-                return data.key === produto;
-              })
-        console.log(`add ${produtoName}`);
-        setParticipantes((prevState)=> [...prevState, produtoName]);
-        setCarteira(carteira + data.produto.valor);
+        data.map(item => { if(item.value === produtoId){
+            itens.push({
+                label: item.label,
+                quantidade: quantid,
+                value: item.value
+            })
+            setCarteira(carteira + (item.valor*quantid));
+        }});
+        console.log(itens);
         };
     }
 
-    function handleParicipantDelete(produto) {
-        Alert.alert("Remover", `You want remove ${produto}?`,[
-            {
-                text:'sim',
-                onPress: ()=> {
-                    setParticipantes(prevState => (
-                        prevState.filter(produtoName => produtoName !== produto)
-                    ))
-                }       
-            },
-            {
-                text:'não',
-                onPress: ()=>Alert.alert('ok, canceled.')
-            }
-        ])
+    function handleParicipantDelete(produtoId) {
+       // Alert.alert("Remover", `You want remove ${produtoId}?`,[
+       //     {
+       //         text:'sim',
+       //         onPress: ()=> {
+       //             setItens(prevState => (
+       //                 prevState.filter(produtoName => produtoName !== produtoId)
+       //             ))
+       //         }       
+       //     },
+       //     {
+       //         text:'não',
+       //         onPress: ()=>Alert.alert('ok, canceled.')
+       //     }
+       // ])
     }
 
     return (
@@ -56,48 +69,65 @@ export function Home() {
             <Text style={styles.subTitle}> sexta-fereira, 23 de junho</Text>
             </View>
 
-{/*link document dropBox https://www.npmjs.com/package/react-native-dropdown-select-list */ }
-            <View style={styles.boxDrop}>
-                <SelectList 
-               setSelected={setSelected} 
-               placeholder='Escolha seu alimento'
-               searchPlaceholder='Busque seu alimento'
-               data={data}  
-                />
+{/* Campo dos inputs */}
+    <View style={styles.boxDrop}>
+    {/*link document dropBox https://www.npmjs.com/package/react-native-element-dropdown */ }
+    <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={data}
+        search
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder="Selecione seu produto"
+        searchPlaceholder="Buscando..."
+        value={value}
+        onChange={item => {
+          setValue(item.value);
+        }}
+    />
+    {/* input quantidade de produto */}
+    <TextInput 
+            style={styles.inputQuantid}
+            placeholder='n°'
+            type={Number}
+            placeholderTextColor={'#fff'}
+            value={quantid}
+            onChangeText={setQuantid}         
+    />
+    {/* button submit */}      
+    <TouchableOpacity 
+        style={styles.button} 
+        onPress={()=>handleParicipantAdd(value)}>
+            <Text  style={styles.buttonText}> + </Text>
+    </TouchableOpacity>
+    </View>
+{/* Campo do  valor da carteira */}
+    <View style={styles.boxValor}>
+        <Text>{`Saldo: ${carteira}`}</Text>
+    </View>
+    <View>
                 
-                <TouchableOpacity 
-                style={styles.button} 
-                onPress={()=>handleParicipantAdd(selected)}>
-                <Text  style={styles.buttonText}> + </Text>
+        {itens.map((item, index) => (
+            <View style={styles.boxParticipant} key={index}>
+            <Participante  
+            name={item.label} 
+            quantidade={item.quantidade}
+            />
+            <TouchableOpacity 
+            style={styles.buttonDelete} 
+            onPress={()=>{handleParicipantDelete(index)}}>
+                <Text  style={styles.buttonDeleteText}> - </Text>
             </TouchableOpacity>
-
-            </View>
-
-            <View style={styles.boxValor}>
-                <Text>{carteira}</Text>
-            </View>
-            
-
-            <View>
-                
-                  <FlatList
-                  data={participantes}
-                  keyExtractor={(item)=> item}
-                  renderItem={({item})=> (
-            <Participante key={item} 
-            name={item.value} 
-            valor={item.valor}
-            participantRemove={()=>handleParicipantDelete(item)} />
-            )}
-                  ListFooterComponent={()=>{
-                    <Text>
-                        adicione algum participante. 
-                    </Text>
-                  }}
-                   />
-               
-            </View>
         </View>
+    ))}
+               
+    </View>
+</View>
     )
 }
 
@@ -130,35 +160,79 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row'
     },
-    input: {
-        color: '#fff',
-        height: 56,
-        backgroundColor: '#1f1e25',
+    inputQuantid: {
+        height: 50,
         fontSize: 16,
-        marginTop: 2,
-        marginLeft: 18,
-        padding: 16,
+        borderRadius: 5,
+        borderColor: 'gray',
+        borderWidth: 0.5,
+        width: 50,
+        textAlign: 'center',
+        textAlignVertical: "center"
 
     },
     button:{
-        width:56,
-        height: 56,
+        width:50,
+        height: 50,
         borderRadius: 5,
         backgroundColor: '#31cf67',
-        justifyContent: 'center',
-        shadowColor: '#31B345',
-        shadowOffset: {width: 5, height: 4},
-        shadowOpacity: 0.8
-
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
     buttonText: {
         fontSize: 24,
         color: '#fff',
-        marginLeft: 14
     },
-    dropDown: {
-        fontSize: 10,
-        color: '#fff'
-    }
+    dropdown: {
+        margin: 16,
+        height: 50,
+        width:200,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+      },
+      placeholderStyle: {
+        fontSize: 16,
+      },
+      selectedTextStyle: {
+        fontSize: 16,
+      },
+      iconStyle: {
+        width: 20,
+        height: 20,
+      },
+      inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+      },
+      boxParticipant: {
+        marginBottom: 5,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems:'center',
+        height: 55,
+        marginRight: 5,
+        marginLeft: 5,
+        padding: 10,
+
+        borderRadius: 5,
+        borderColor: '#727070',
+        borderWidth: 0.5,
+
+        shadowColor: '#504e4e',
+        shadowOffset: {width: 4, height: 5},
+        shadowOpacity: 0.2,
+      },
+      buttonDelete:{
+        width:50,
+        height: 50,
+        borderRadius: 5,
+        backgroundColor: 'red',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
+    buttonDeleteText: {
+        fontSize: 24,
+        color: '#fff',
+    },
   });
   

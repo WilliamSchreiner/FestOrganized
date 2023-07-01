@@ -1,22 +1,15 @@
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native'
 
-export function Participante({name,valor, participantRemove}){
+export function Participante({name,quantidade}){
             
     return(
         <View style={styles.container}>
             <Text style={styles.name}>
                 {name}
             </Text>
-
-            <Text style={styles.valor}>
-                {valor}
+            <Text style={styles.quantidade}>
+                {`quantidade: ${quantidade}`}
             </Text>
-
-            <TouchableOpacity 
-            style={styles.button} 
-            onPress={()=>{participantRemove(name)}}>
-                <Text  style={styles.buttonText}> - </Text>
-            </TouchableOpacity>
             </View>
     )
 }   
@@ -26,44 +19,21 @@ export function Participante({name,valor, participantRemove}){
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 5,
-        width: '100%',
-        flexDirection: 'row'
+width: 200,
+height: 40,
+marginBottom: 5
     },
     name: {
-        color: '#fff',
-        height: 56,
-        backgroundColor: '#1f1e25',
-        textShadowColor: 'blue',
-        textShadowOffset: {width: 2, height: 3},
-        textShadowOpacity: 0.2,
+        height: 20,
+        textShadowColor: 'gray',
+        textShadowOffset: {width: 1, height: 1},
+        textShadowOpacity: 0.1,
         fontSize: 16,
-        marginTop: 2,
-        marginLeft: 18,
-        padding: 16,
-        width: '70%'
 
     },
-    button:{
-        width:56,
-        height: 56,
-        borderRadius: 5,
-        backgroundColor: 'red',
-        textAlign: 'center',
-        justifyContent: 'center',
-        shadowColor: '#CC2E2E',
-        shadowOffset: {width: 5, height: 4},
-        shadowOpacity: 0.8
-        
-
-    },
-    buttonText: {
-        fontSize: 24,
-        color: '#fff',
-        marginLeft: 18
-    },
-    valor: {
-        fontSize: 24,
+    quantidade: {
+        height:20,
+        fontSize: 16,
     }
   });
   
