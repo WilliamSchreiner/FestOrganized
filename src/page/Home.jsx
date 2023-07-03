@@ -10,7 +10,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 export function Home() {
     
     const data = [
-    { label: 'Item 1- R$: 5',valor: 5, value: '1' },
+    { label: 'Item 1- R$: 5',valor: 5, value: '1', color: '#ffac00' },
     { label: 'Item 2- R$: 5',valor: 5, value: '2' },
     { label: 'Item 3- R$: 5',valor: 5, value: '3' },
     { label: 'Item 4- R$: 5',valor: 5, value: '4' },
@@ -65,6 +65,7 @@ export function Home() {
             <StatusBar style='auto'/>
             
             <View  style={styles.header}>
+            <Image/>
             <Text style={styles.title}> Nome do Evento</Text>
             <Text style={styles.subTitle}> sexta-fereira, 23 de junho</Text>
             </View>
@@ -110,8 +111,7 @@ export function Home() {
     <View style={styles.boxValor}>
         <Text>{`Saldo: ${carteira}`}</Text>
     </View>
-    <View>
-                
+    <View>      
         {itens.map((item, index) => (
             <View style={styles.boxParticipant} key={index}>
             <Participante  
@@ -125,7 +125,10 @@ export function Home() {
             </TouchableOpacity>
         </View>
     ))}
-               
+             
+    </View>
+    <View style={styles.footer}>
+        <Image/>
     </View>
 </View>
     )
