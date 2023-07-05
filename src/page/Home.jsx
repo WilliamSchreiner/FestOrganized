@@ -10,14 +10,14 @@ import { Dropdown } from 'react-native-element-dropdown';
 export function Home() {
     
     const data = [
-    { label: 'Item 1- R$: 5',valor: 5, value: '1', backgroundColor:'ffac00' },
-    { label: 'Item 2- R$: 5',valor: 5, value: '2' },
-    { label: 'Item 3- R$: 5',valor: 5, value: '3' },
-    { label: 'Item 4- R$: 5',valor: 5, value: '4' },
-    { label: 'Item 5- R$: 5',valor: 5, value: '5' },
-    { label: 'Item 6- R$: 5',valor: 5, value: '6' },
-    { label: 'Item 7- R$: 5',valor: 5, value: '7' },
-    { label: 'Item 8- R$: 5',valor: 5, value: '8' },
+    { label: 'Pipoca P R$: 3',valor: 3, value: '1', backgroundColor:'ffac00' },
+    { label: 'Pipoca M R$: 6',valor: 6, value: '2' },
+    { label: 'Pipoca G R$: 9',valor: 9, value: '3' },
+    { label: 'Pé-de-Moleque R$: 4',valor: 4, value: '4' },
+    { label: 'Quentão  R$: 7',valor: 7, value: '5' },
+    { label: 'Cachorro-Quente R$: 6',valor: 6, value: '6' },
+    { label: 'Rapadura R$: 2',valor: 2, value: '7' },
+    { label: 'Bolo R$: 5',valor: 5, value: '8' },
   ];
 
     const [itens, setItens] = useState([]);
@@ -61,19 +61,21 @@ export function Home() {
             <StatusBar style='auto'/>
             
             <View  style={styles.header}>
-            <Text style={styles.title}> Nome do Evento</Text>
-            <Text style={styles.subTitle}> sexta-fereira, 23 de junho</Text>
+            <Text style={styles.title}> Festa Julina</Text>
+            <Text style={styles.subTitle}> quarta-feira, 05 de Julho</Text>
             </View>
 
 {/* Campo dos inputs */}
     <View style={styles.boxDrop}>
     {/*link document dropBox https://www.npmjs.com/package/react-native-element-dropdown */ }
     <Dropdown
+
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
+        containerStyle={styles.containerDropdown}
         data={data}
         search
         maxHeight={300}
@@ -112,6 +114,7 @@ export function Home() {
             style={styles.boxParticipant} key={index}>
             <Participante  
             name={item.label} 
+            posicao={index + 1}
             quantidade={item.quantidade}
             />
             <TouchableOpacity 
@@ -137,8 +140,8 @@ const styles = StyleSheet.create({
         height:'100%',
         borderColor: 'red',
         borderWidth: 10,
-        backgroundColor:'#fff',
-        color:'#000'
+        backgroundColor:'#09458d',
+        color:'#000',
     },
     header: {
         marginLeft: 100,
@@ -149,15 +152,20 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 48,
-        color:'#000',
+        color:'#dd127b',
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10
     
     },
     subTitle: {
-        color: '#000',
-        textShadowColor: '#000',
+        color: '#dd127b',
         fontSize: 16,
         marginTop: 2,
         marginLeft: 18,
+        textShadowColor: 'rgba(0, 0, 0, 1)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10
     },
     boxInput: {
         marginTop: 36,
@@ -196,18 +204,25 @@ const styles = StyleSheet.create({
     dropdown: {
         margin: 16,
         height: 50,
-        width:200,
+        width:300,
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
-        color:'#000'
+        color:'#000',
+        display:'flex',
+        flex:1,
+        padding:5,
+        backgroundColor:'red',
+        borderRadius:5
       },
       placeholderStyle: {
         fontSize: 16,
-        color:'#000'
+        color:'#000',
+
       },
       selectedTextStyle: {
         fontSize: 16,
-        color:'#000'
+        color:'purple'
+
       },
       iconStyle: {
         width: 20,
@@ -220,6 +235,7 @@ const styles = StyleSheet.create({
         color:'#000'
       },
       boxParticipant: {
+        display:'flex',
         marginBottom: 5,
         width: '100%',
         flexDirection: 'row',
@@ -246,7 +262,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         alignItems:'center',
-        marginRight:'-1.4em'
+        marginRight:'-1.15em'
     },
     buttonDeleteText: {
         fontSize: 24,
@@ -256,5 +272,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:'0.25em'
     },
+    containerDropdown: {
+        backgroundColor:'#888'
+    }
 })
   
+
+//Colors: #dd127b , #85c226, #fff500, #da251c, #09458d, #e67817
