@@ -31,11 +31,13 @@ export function Home() {
             Alert.alert(`Escolha um produto.`);
             console.log(`Escolha um produto.`);
         }else {
-        data.map(item => { if(item.value === produtoId){
+        data.map((item) => { if(item.value === produtoId){
             itens.push({
+                id: Math.random().toString(36),
                 label: item.label,
+                valor: item.valor,
                 quantidade: quantid,
-                value: item.value
+                
             })
             setCarteira(carteira + (item.valor*quantid));
         }});
@@ -44,26 +46,19 @@ export function Home() {
     }
 
     function handleParicipantDelete(produtoId) {
-       // Alert.alert("Remover", `You want remove ${produtoId}?`,[
-       //     {
-       //         text:'sim',
-       //         onPress: ()=> {
-       //             setItens(prevState => (
-       //                 prevState.filter(produtoName => produtoName !== produtoId)
-       //             ))
-       //         }       
-       //     },
-       //     {
-       //         text:'não',
-       //         onPress: ()=>Alert.alert('ok, canceled.')
-       //     }
-       // ])
+// encontrar valor e setar carteira
+   let itemTemp = itens.find(item => item.id === produtoId);
+   console.log(`${itemTemp.label} foi deletado e o valor de ${itemTemp.valor*itemTemp.quantidade} foram descontados de sua carteira.`);
+   setCarteira(carteira - (itemTemp.valor*itemTemp.quantidade));
+//deletar item
+   let itensTemp = itens.filter(item => item.id !== produtoId);
+   setItens(itensTemp);
+    
     }
 
     return (
         <View style={styles.container}>
-            <StatusBar style='auto'/>
-            
+            <StatusBar style='auto'/>       
             <View  style={styles.header}>
             <Text style={styles.title}> Nome do Evento</Text>
             <Text style={styles.subTitle}> sexta-fereira, 23 de junho</Text>
@@ -120,7 +115,7 @@ export function Home() {
             />
             <TouchableOpacity 
             style={styles.buttonDelete} 
-            onPress={()=>{handleParicipantDelete(index)}}>
+            onPress={()=>{handleParicipantDelete(item.id)}}>
                 <Text  style={styles.buttonDeleteText}> - </Text>
             </TouchableOpacity>
         </View>
