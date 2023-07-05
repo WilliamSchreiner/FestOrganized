@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet,TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet,TextInput, TouchableOpacity, Alert, Image, ImageBackground } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 import { Participante } from '../components/Participantes';
@@ -10,7 +10,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 export function Home() {
     
     const data = [
-    { label: 'Item 1- R$: 5',valor: 5, value: '1', color: '#ffac00' },
+    { label: 'Item 1- R$: 5',valor: 5, value: '1', backgroundColor:'ffac00' },
     { label: 'Item 2- R$: 5',valor: 5, value: '2' },
     { label: 'Item 3- R$: 5',valor: 5, value: '3' },
     { label: 'Item 4- R$: 5',valor: 5, value: '4' },
@@ -35,7 +35,8 @@ export function Home() {
             itens.push({
                 label: item.label,
                 quantidade: quantid,
-                value: item.value
+                value: item.value,
+                backgroundColor: item.backgroundColor
             })
             setCarteira(carteira + (item.valor*quantid));
         }});
@@ -63,9 +64,7 @@ export function Home() {
     return (
         <View style={styles.container}>
             <StatusBar style='auto'/>
-            
             <View  style={styles.header}>
-            <Image/>
             <Text style={styles.title}> Nome do Evento</Text>
             <Text style={styles.subTitle}> sexta-fereira, 23 de junho</Text>
             </View>
@@ -113,7 +112,8 @@ export function Home() {
     </View>
     <View>      
         {itens.map((item, index) => (
-            <View style={styles.boxParticipant} key={index}>
+            <View 
+            style={styles.boxParticipant} key={index}>
             <Participante  
             name={item.label} 
             quantidade={item.quantidade}
@@ -127,35 +127,41 @@ export function Home() {
     ))}
              
     </View>
-    <View style={styles.footer}>
-        <Image/>
     </View>
-</View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      width: '100%'
+        display:'flex',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        height:'100%',
+        borderColor: 'red',
+        borderWidth: 10,
+        backgroundColor:'#fff',
+        color:'#000'
     },
     header: {
-        marginLeft: 10,
-        width: '100%'
+        marginLeft: 100,
+        width: '100%',
+        color:'#000'
       },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 48,
+        color:'#000',
     
     },
     subTitle: {
-        color: 'gray',
-        textShadowColor: '#fff',
+        color: '#000',
+        textShadowColor: '#000',
         fontSize: 16,
         marginTop: 2,
-        marginLeft: 18
+        marginLeft: 18,
     },
     boxInput: {
         marginTop: 36,
@@ -181,10 +187,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#31cf67',
         textAlign: 'center',
         textAlignVertical: 'center',
+        alignItems:'center',
     },
     buttonText: {
+        textAlign:'center',
+        justifyContent:'center',
+        alignItems:'center',
         fontSize: 24,
-        color: '#fff',
+        color: '#000',
+        marginTop:'0.2em'
     },
     dropdown: {
         margin: 16,
@@ -192,20 +203,25 @@ const styles = StyleSheet.create({
         width:200,
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
+        color:'#000'
       },
       placeholderStyle: {
         fontSize: 16,
+        color:'#000'
       },
       selectedTextStyle: {
         fontSize: 16,
+        color:'#000'
       },
       iconStyle: {
         width: 20,
         height: 20,
+        color:'#000'
       },
       inputSearchStyle: {
         height: 40,
         fontSize: 16,
+        color:'#000'
       },
       boxParticipant: {
         marginBottom: 5,
@@ -224,18 +240,25 @@ const styles = StyleSheet.create({
         shadowColor: '#504e4e',
         shadowOffset: {width: 4, height: 5},
         shadowOpacity: 0.2,
+        color:'#000'
       },
       buttonDelete:{
-        width:50,
-        height: 50,
+        width:51,
+        height: 51,
         borderRadius: 5,
         backgroundColor: 'red',
         textAlign: 'center',
         textAlignVertical: 'center',
+        alignItems:'center',
+        marginRight:'-1.4em'
     },
     buttonDeleteText: {
         fontSize: 24,
-        color: '#fff',
+        color: '#000',
+        textAlign:'center',
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:'0.25em'
     },
-  });
+})
   

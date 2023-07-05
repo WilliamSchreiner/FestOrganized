@@ -8,15 +8,11 @@ export function Participante({name,quantidade}){
                 {name}
             </Text>
             <Text style={styles.quantidade}>
-                {`quantidade: ${quantidade}`}
+                {`Quantidade: ${quantidade}`}
             </Text>
             </View>
     )
 }   
-
-
-
-
 const styles = StyleSheet.create({
     container: {
 width: 200,
