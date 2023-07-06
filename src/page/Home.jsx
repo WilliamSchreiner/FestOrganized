@@ -106,7 +106,7 @@ export function Home() {
     </View>
 {/* Campo do  valor da carteira */}
     <View style={styles.boxValor}>
-        <Text>{`Saldo: ${carteira}`}</Text>
+        <Text style={styles.boxValor}>{`Saldo: $${carteira}`}</Text>
     </View>
     <View>      
         {itens.map((item, index) => (
@@ -138,24 +138,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         height:'100%',
-        borderColor: 'red',
-        borderWidth: 10,
-        backgroundColor:'#09458d',
+        backgroundColor:'#ecebeb',
         color:'#000',
     },
     header: {
-        marginLeft: 100,
         width: '100%',
-        color:'#000'
+        color:'#000',
+        backgroundColor:'#000',
+        borderBottomEndRadius:50,
+        paddingBottom:15,
+        height:150
       },
     title: {
-        fontSize: 24,
+        justifyContent:'center',
+        fontSize: 46,
         fontWeight: 'bold',
-        marginTop: 48,
-        color:'#dd127b',
-        textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        textShadowOffset: {width: -1, height: 1},
-        textShadowRadius: 10
+        marginTop: 24,
+        color:'#df6aa6',
     
     },
     subTitle: {
@@ -171,17 +170,26 @@ const styles = StyleSheet.create({
         marginTop: 36,
         marginBottom: 42,
         width: '100%',
-        flexDirection: 'row'
+        flexDirection: 'row',
+
     },
     inputQuantid: {
         height: 50,
         fontSize: 16,
         borderRadius: 5,
-        borderColor: 'gray',
+        borderColor: '#31cf67',
         borderWidth: 0.5,
         width: 50,
         textAlign: 'center',
-        textAlignVertical: "center"
+        textAlignVertical: "center",
+        marginTop:15,
+        borderRadius:50,
+        marginRight:5,
+        marginLeft:-10,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
 
     },
     button:{
@@ -192,6 +200,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         alignItems:'center',
+        marginTop:15,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
     },
     buttonText: {
         textAlign:'center',
@@ -204,15 +217,20 @@ const styles = StyleSheet.create({
     dropdown: {
         margin: 16,
         height: 50,
-        width:300,
+        width:200,
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
         color:'#000',
         display:'flex',
         flex:1,
         padding:5,
-        backgroundColor:'red',
-        borderRadius:5
+        borderRadius:5,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        borderWidth:1,
+        borderColor:'#31cf67' 
       },
       placeholderStyle: {
         fontSize: 16,
@@ -221,7 +239,7 @@ const styles = StyleSheet.create({
       },
       selectedTextStyle: {
         fontSize: 16,
-        color:'purple'
+        color:'#000'
 
       },
       iconStyle: {
@@ -246,13 +264,18 @@ const styles = StyleSheet.create({
         padding: 10,
 
         borderRadius: 5,
-        borderColor: '#727070',
+        borderColor: '#b8b6b6',
         borderWidth: 0.5,
 
-        shadowColor: '#504e4e',
+        shadowColor: '#d4d2d2',
         shadowOffset: {width: 4, height: 5},
         shadowOpacity: 0.2,
-        color:'#000'
+        color:'#000',
+        backgroundColor:'#fff',
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
       },
       buttonDelete:{
         width:51,
@@ -273,9 +296,17 @@ const styles = StyleSheet.create({
         marginTop:'0.25em'
     },
     containerDropdown: {
-        backgroundColor:'#888'
+        backgroundColor:'#d3d3d3'
+    },
+    boxDrop:{
+        display:'flex',
+        flexDirection:'row'
+    },
+    boxValor:{
+        fontSize:30,
+        color:'#85c226'
     }
 })
   
 
-//Colors: #dd127b , #85c226, #fff500, #da251c, #09458d, #e67817
+//Colors: #dd127b , #85c226, #fff500, #da251c, #09458d, #e67817  

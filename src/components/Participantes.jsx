@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     container: {
     display:'flex',
     flexDirection:'column',
-    width: 300,
+    width: 250,
     height: 40,
     marginBottom: 5,
     gap:5
