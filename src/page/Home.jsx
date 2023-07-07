@@ -41,7 +41,7 @@ export function Home() {
                 value: item.value
             })
             setCarteira(carteira + (item.valor*quantid));
-            setItensVend(itensVend + quantid);
+            setItensVend(itensVend + Number(quantid));
         }});
         console.log(itens);
         };
@@ -112,8 +112,8 @@ export function Home() {
         <Text style={styles.boxValor}>{`Saldo: $${carteira}`}</Text>
     </View>
 {/* Campo dos itens vendidos */}
-<View style={styles.boxSaldo}>
-        <Text style={styles.boxValor}>{`Vendidos: $${itensVend}`}</Text>
+<View style={styles.boxSell}>
+        <Text style={styles.boxVendidos}>{`Vendidos: ${itensVend}`}</Text>
     </View>
     <View>      
         {itens.map((item, index) => (
@@ -327,6 +327,23 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
         marginBottom:15
     },
+    boxSell:{
+        borderWidth:1,
+        borderColor:'#073875',
+        padding:5,
+        borderRadius:25,
+        width:'fit-content',
+        backgroundColor:'#166fdc',
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        marginBottom:15
+    },
+    boxVendidos:{
+        fontSize:25,
+        color:'#000'
+    }
 })
   
 
