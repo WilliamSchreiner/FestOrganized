@@ -101,11 +101,11 @@ export function Home() {
     <TouchableOpacity 
         style={styles.button} 
         onPress={()=>handleParicipantAdd(value)}>
-            <Text  style={styles.buttonText}> + </Text>
+            <Text  style={styles.buttonText}> ➕ </Text>
     </TouchableOpacity>
     </View>
 {/* Campo do  valor da carteira */}
-    <View style={styles.boxValor}>
+    <View style={styles.boxSaldo}>
         <Text style={styles.boxValor}>{`Saldo: $${carteira}`}</Text>
     </View>
     <View>      
@@ -120,7 +120,7 @@ export function Home() {
             <TouchableOpacity 
             style={styles.buttonDelete} 
             onPress={()=>{handleParicipantDelete(item.id)}}>
-                <Text  style={styles.buttonDeleteText}> - </Text>
+                <Text  style={styles.buttonDeleteText}> ❌ </Text>
             </TouchableOpacity>
         </View>
     ))}
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     header: {
         width: '100%',
         color:'#000',
-        backgroundColor:'#000',
+        backgroundColor:'#2d77d1',
         borderBottomEndRadius:50,
         paddingBottom:15,
         height:150
@@ -154,11 +154,11 @@ const styles = StyleSheet.create({
         fontSize: 46,
         fontWeight: 'bold',
         marginTop: 24,
-        color:'#df6aa6',
+        color:'#000',
     
     },
     subTitle: {
-        color: '#dd127b',
+        color: '#000',
         fontSize: 16,
         marginTop: 2,
         marginLeft: 18,
@@ -188,23 +188,23 @@ const styles = StyleSheet.create({
         marginLeft:-10,
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+        shadowOpacity: 0.9,
+        shadowRadius: 5,
 
     },
     button:{
         width:50,
         height: 50,
         borderRadius: 5,
-        backgroundColor: '#31cf67',
+        backgroundColor: '#85c226',
         textAlign: 'center',
         textAlignVertical: 'center',
         alignItems:'center',
         marginTop:15,
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+        shadowOpacity: 0.9,
+        shadowRadius: 5,
     },
     buttonText: {
         textAlign:'center',
@@ -212,7 +212,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         fontSize: 24,
         color: '#000',
-        marginTop:'0.2em'
+        marginTop:'0.3em',
+        tintColor:'#85c226'
     },
     dropdown: {
         margin: 16,
@@ -227,8 +228,8 @@ const styles = StyleSheet.create({
         borderRadius:5,
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+        shadowOpacity: 0.9,
+        shadowRadius: 5,
         borderWidth:1,
         borderColor:'#31cf67' 
       },
@@ -274,14 +275,14 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+        shadowOpacity: 0.9,
+        shadowRadius: 5,
       },
       buttonDelete:{
-        width:51,
-        height: 51,
+        width:52,
+        height: 52,
         borderRadius: 5,
-        backgroundColor: 'red',
+        backgroundColor: '#da251c',
         textAlign: 'center',
         textAlignVertical: 'center',
         alignItems:'center',
@@ -303,9 +304,22 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     boxValor:{
-        fontSize:30,
-        color:'#85c226'
-    }
+        fontSize:25,
+        color:'#000'
+    },
+    boxSaldo:{
+        borderWidth:1,
+        borderColor:'#85c226',
+        padding:5,
+        borderRadius:25,
+        width:'fit-content',
+        backgroundColor:'#b3e75e',
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        marginBottom:15
+    },
 })
   
 

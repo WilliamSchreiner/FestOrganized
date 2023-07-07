@@ -5,8 +5,7 @@ export function Participante({name,quantidade, posicao}){
     return(
         <View style={styles.container}>
                    <View style={styles.pos}>
-            <Text>{posicao}</Text>
-
+            <Text style={styles.posicao}>{posicao}</Text>
             <Text style={styles.name}>
                 {name}
             </Text>
@@ -42,7 +41,9 @@ const styles = StyleSheet.create({
     },
     posicao: {
         height:20,
-        fontSize: 16,
+        fontSize: 18,
+        color:'#837f0a',
+        fontWeight:'bold'
         
     },
     pos:{
