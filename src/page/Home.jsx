@@ -23,6 +23,7 @@ export function Home() {
     const [itens, setItens] = useState([]);
     const [value, setValue] = useState("");
     const [quantid, setQuantid] = useState(1);
+    const [itensVend, setItensVend] = useState(0);
     const [carteira, setCarteira] = useState(0);
 
 
@@ -40,6 +41,7 @@ export function Home() {
                 value: item.value
             })
             setCarteira(carteira + (item.valor*quantid));
+            setItensVend(itensVend + quantid);
         }});
         console.log(itens);
         };
@@ -50,6 +52,7 @@ export function Home() {
    let itemTemp = itens.find(item => item.id === produtoId);
    console.log(`${itemTemp.label} foi deletado e o valor de ${itemTemp.valor*itemTemp.quantidade} foram descontados de sua carteira.`);
    setCarteira(carteira - (itemTemp.valor*itemTemp.quantidade));
+   setItensVend(itensVend - itemTemp.quantidade);
 //deletar item
    let itensTemp = itens.filter(item => item.id !== produtoId);
    setItens(itensTemp);
@@ -107,6 +110,10 @@ export function Home() {
 {/* Campo do  valor da carteira */}
     <View style={styles.boxSaldo}>
         <Text style={styles.boxValor}>{`Saldo: $${carteira}`}</Text>
+    </View>
+{/* Campo dos itens vendidos */}
+<View style={styles.boxSaldo}>
+        <Text style={styles.boxValor}>{`Vendidos: $${itensVend}`}</Text>
     </View>
     <View>      
         {itens.map((item, index) => (
