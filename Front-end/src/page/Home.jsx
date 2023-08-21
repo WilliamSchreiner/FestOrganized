@@ -2,10 +2,10 @@ import { View, Text, StyleSheet,TextInput, TouchableOpacity, Alert, Image, Image
 
 import { StatusBar } from 'expo-status-bar';
 import { Participante } from '../components/Participantes';
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
+import { server } from "../api/axios";
 
 import { Dropdown } from 'react-native-element-dropdown';
-
 
 export function Home() {
     
@@ -26,37 +26,52 @@ export function Home() {
     const [itensVend, setItensVend] = useState(0);
     const [carteira, setCarteira] = useState(0);
 
+    useEffect(() => {
+    Load();
+    itens.map((item) => {
+        setCarteira(carteira + (item.valor*item.quantidade));
+    setItensVend(itensVend + item.quantidade)
+    })
+  }, []);
 
-    function handleParicipantAdd(produtoId) {
+  async function Load() {
+   const temp = await server.get("/getall");
+   console.log(temp);
+   setItens(temp.data); 
+  
+  }
+
+   async  function handleParicipantAdd(produtoId) {
         if (produtoId === ""){
             Alert.alert(`Escolha um produto.`);
             console.log(`Escolha um produto.`);
         }else {
-        data.map((item) => { if(item.value === produtoId){
-            itens.push({
-                id: Math.random().toString(36),
-                label: item.label,
-                valor: item.valor,
-                quantidade: quantid,
-                value: item.value
-            })
-            setCarteira(carteira + (item.valor*quantid));
-            setItensVend(itensVend + Number(quantid));
+      await  data.map((item) => { if(item.value === produtoId){       
+
+    server.post(`/cadastrar`, {
+    produto: item.label,
+    quantidade: Number(quantid),
+    valor: Number(item.valor),
+      });
+    setCarteira(carteira + (item.valor*quantid));
+    setItensVend(itensVend + Number(quantid));
+      
         }});
-        console.log(itens);
+       Load(); 
+       console.log(itens);
+        
         };
     }
 
-    function handleParicipantDelete(produtoId) {
+  async  function handleParicipantDelete(produtoId) {
 // encontrar valor e setar carteira
    let itemTemp = itens.find(item => item.id === produtoId);
    console.log(`${itemTemp.label} foi deletado e o valor de ${itemTemp.valor*itemTemp.quantidade} foram descontados de sua carteira.`);
    setCarteira(carteira - (itemTemp.valor*itemTemp.quantidade));
    setItensVend(itensVend - itemTemp.quantidade);
 //deletar item
-   let itensTemp = itens.filter(item => item.id !== produtoId);
-   setItens(itensTemp);
-    
+   await server.delete(`deletar/${produtoId}`);
+   Load(); 
     }
 
     return (
@@ -120,7 +135,7 @@ export function Home() {
             <View 
             style={styles.boxParticipant} key={index}>
             <Participante  
-            name={item.label} 
+            name={item.produto} 
             posicao={index + 1}
             quantidade={item.quantidade}
             />

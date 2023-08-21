@@ -1,0 +1,16 @@
+### Route raiz
+GET http://localhost:3333/user/
+
+### Buscar todo os ID 
+GET http://localhost:3333/user/getall
+
+### Inserir Informação no banco 
+POST http://localhost:3333/user/cadastrar 
+content-type: application/json
+
+{
+"produto": "refri", "quantidade": 5, "valor": 5
+}
+
+### Deletar um usuario pelo ID no banco 
+DELETE http://localhost:3333/user/deletar/f0ba56c0-1a06-4bc9-8e4b-cecf34aa6ddc
